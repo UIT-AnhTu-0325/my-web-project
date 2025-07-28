@@ -1,0 +1,32 @@
+# Python Dependencies for Hotel E-commerce System
+
+# Web framework for email service
+Flask==2.3.3
+
+# Template engine for email templates
+Jinja2==3.1.2
+
+# HTTP client for making requests
+requests==2.31.0
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# Data analysis and processing
+pandas==2.0.3
+numpy==1.24.3
+
+# Email handling (built-in smtplib is used, but these are for advanced features)
+# email-validator==2.0.0
+
+# CSV handling (built-in csv module is used)
+# Additional utilities if needed
+# openpyxl==3.1.2  # For Excel export if needed
+
+# Development and testing
+pytest==7.4.0
+pytest-cov==4.1.0
+
+# Code formatting and linting
+black==23.7.0
+flake8==6.0.0

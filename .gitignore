@@ -1,0 +1,39 @@
+# Node.js (frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/.env*
+
+# Go (backend)
+backend/bin/
+backend/vendor/
+backend/.env*
+*.exe
+*.test
+*.out
+
+# Python (scripts)
+python-scripts/__pycache__/
+python-scripts/*.pyc
+python-scripts/.env*
+python-scripts/.venv/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.env*
+*.local
+coverage/
+dist/
+build/
