@@ -20,9 +20,10 @@ func NewConnection() (*DB, error) {
 	dbUser := getEnv("DB_USER", "postgres")
 	dbPassword := getEnv("DB_PASSWORD", "root")
 	dbName := getEnv("DB_NAME", "hotel_ecommerce")
+	dbSchema := getEnv("DB_SCHEMA", "public")
 
-	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		dbHost, dbPort, dbUser, dbPassword, dbName)
+	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s search_path=%s sslmode=disable",
+		dbHost, dbPort, dbUser, dbPassword, dbName, dbSchema)
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {

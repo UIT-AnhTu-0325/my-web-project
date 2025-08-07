@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: 495599768771.dkr.ecr.us-east-1.amazonaws.com/my-ecommerce:latest # Will be updated by CI/CD
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: "my-database.cvq6668iiln8.ap-southeast-1.rds.amazonaws.com"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: DB_PASSWORD
+            - name: DB_NAME
+              value: "hotel_ecommerce"
+            - name: DB_SCHEMA
+              value: "public"
+            - name: EMAIL_SERVICE_URL
+              value: ""
+            - name: FRONTEND_URL
+              value: ""
+            - name: PORT
+              value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

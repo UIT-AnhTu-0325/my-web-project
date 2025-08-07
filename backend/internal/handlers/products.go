@@ -28,7 +28,7 @@ func (h *ProductHandler) GetProducts(c *gin.Context) {
 	if category != "" {
 		query = `
 			SELECT id, name, description, price, category, stock_quantity, 
-			       images, is_active, created_at, updated_at
+				   images, is_active, created_at, updated_at
 			FROM products 
 			WHERE is_active = true AND category = $1
 			ORDER BY name`
@@ -36,7 +36,7 @@ func (h *ProductHandler) GetProducts(c *gin.Context) {
 	} else {
 		query = `
 			SELECT id, name, description, price, category, stock_quantity, 
-			       images, is_active, created_at, updated_at
+				   images, is_active, created_at, updated_at
 			FROM products 
 			WHERE is_active = true
 			ORDER BY category, name`
@@ -44,6 +44,8 @@ func (h *ProductHandler) GetProducts(c *gin.Context) {
 
 	rows, err := h.db.Query(query, args...)
 	if err != nil {
+		// Log the error for debugging
+		println("[GetProducts] DB query error:", err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch products"})
 		return
 	}
@@ -58,6 +60,8 @@ func (h *ProductHandler) GetProducts(c *gin.Context) {
 			&product.IsActive, &product.CreatedAt, &product.UpdatedAt,
 		)
 		if err != nil {
+			// Log the error for debugging
+			println("[GetProducts] Row scan error:", err.Error())
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to scan product data"})
 			return
 		}
@@ -82,7 +86,7 @@ func (h *ProductHandler) GetProductByID(c *gin.Context) {
 
 	query := `
 		SELECT id, name, description, price, category, stock_quantity, 
-		       images, is_active, created_at, updated_at
+			   images, is_active, created_at, updated_at
 		FROM products 
 		WHERE id = $1 AND is_active = true`
 
