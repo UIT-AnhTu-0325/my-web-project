@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 495599768771.dkr.ecr.us-east-1.amazonaws.com/my-ecommerce:latest # Will be updated by CI/CD
+          image: 495599768771.dkr.ecr.ap-southeast-1.amazonaws.com/my-ecr:latest # Will be updated by CI/CD
           ports:
             - containerPort: 8080
           env:
